@@ -1,0 +1,14 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "E-Commerce Competitor Price & Stock Monitor Output",
+  "description": "Structured dataset containing competitor product name, price, stock status (IN_STOCK / OUT_OF_STOCK), free shipping conditions, baseline price difference, AI merchandising proposal, and Slack alert message.",
+  "type": "object",
+  "properties": {
+    "dataset": {
+      "type": "string",
+      "title": "Analyzed Competitor Products",
+      "description": "Dataset containing all monitored competitor product records and AI merchandising insights.",
+      "template": "{{links.apiDefaultDatasetUrl}}/items"
+    }
+  }
+}

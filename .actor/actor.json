@@ -1,0 +1,11 @@
+{
+  "actorSpecification": 1,
+  "name": "ecommerce-competitor-price-stock-monitor",
+  "title": "E-Commerce Competitor Price & Stock Monitor (Shopify + JSON-LD + AI Alerts)",
+  "description": "Asynchronously monitor competitor e-commerce product URLs via Shopify /products/*.json endpoints and Schema.org JSON-LD (Product/Offer). Extracts product name, price, currency, stock availability (IN_STOCK / OUT_OF_STOCK), and free shipping conditions, calculates price difference against your baseline price, and generates AI merchandising proposals & Slack alerts with Gemini 2.5 Flash.",
+  "version": "1.0.0",
+  "buildTag": "latest",
+  "dockerfile": "../Dockerfile",
+  "input": "./input_schema.json",
+  "output": "./output_schema.json"
+}

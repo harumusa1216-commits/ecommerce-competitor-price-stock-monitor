@@ -1,0 +1,45 @@
+{
+  "title": "E-Commerce Competitor Price & Stock Monitor Input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "productUrls": {
+      "title": "Competitor Product URLs",
+      "type": "array",
+      "description": "List of competitor e-commerce product URLs to monitor (supports Shopify /products/* URLs and any store with Schema.org Product/Offer JSON-LD).",
+      "editor": "stringList",
+      "default": [
+        "https://allbirds.com/products/mens-tree-runners"
+      ],
+      "prefill": [
+        "https://allbirds.com/products/mens-tree-runners"
+      ]
+    },
+    "ourBaselinePrice": {
+      "title": "Our Baseline Price",
+      "type": "integer",
+      "editor": "number",
+      "description": "Your baseline product price for calculating price difference (priceDiff and priceDiffPercent) against each competitor product.",
+      "default": 100,
+      "prefill": 100,
+      "minimum": 0
+    },
+    "geminiApiKey": {
+      "title": "Gemini API Key (Optional - BYOK)",
+      "type": "string",
+      "description": "Google Gemini API key for AI merchandising proposals and Slack alert generation. Falls back to GEMINI_API_KEY environment variable if omitted.",
+      "editor": "textfield",
+      "isSecret": true
+    },
+    "geminiModel": {
+      "title": "Gemini Model Override (Optional)",
+      "type": "string",
+      "description": "Optional Gemini model name override (defaults to gemini-2.5-flash with automatic fallback discovery).",
+      "editor": "textfield",
+      "default": ""
+    }
+  },
+  "required": [
+    "productUrls"
+  ]
+}
