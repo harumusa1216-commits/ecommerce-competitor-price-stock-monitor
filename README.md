@@ -1,8 +1,15 @@
 # E-Commerce Competitor Price & Stock Monitor (Shopify + JSON-LD + AI Alerts)
 
-Stop checking competitor product pages manually—or building fragile browser scrapers just to track price drops, stockouts, and shipping promos.
+Monitors Shopify and JSON-LD product pages using lightweight HTTP requests (no headless browser) to track price drops, stock changes, and shipping thresholds, with optional AI merchandising alerts.
 
-**E-Commerce Competitor Price & Stock Monitor** asynchronously fetches competitor product URLs using lightweight HTTP (`httpx` + `BeautifulSoup`), extracts structured data from **Shopify `/products/*.json` endpoints** and **Schema.org JSON-LD (`Product` / `Offer`)**, calculates exact price differences against your `ourBaselinePrice`, and uses **Gemini 2.5 Flash** to generate actionable **merchandising proposals** and ready-to-post **Slack alerts**.
+Pricing starts at $2.00 per 1,000 products (down to $1.00/1,000 on higher Apify plans). A 10-product test run costs roughly $0.02, which fits easily within Apify's $5 monthly free credit.
+
+## Quick Output Preview
+
+| Product (`productName`) | Price | Stock (`stockStatus`) | Shipping | Action (`recommendedAction`) |
+| :--- | :--- | :--- | :--- | :--- |
+| Men's Tree Runners | $98.00 (-2.0%) | `IN_STOCK` | Free over $75 | `LAUNCH_PROMO_BUNDLE` |
+| Wireless Earbuds Pro | $79.00 (-15.0%) | `OUT_OF_STOCK` | Free over $50 | `CAPTURE_STOCKOUT_DEMAND` |
 
 ---
 
@@ -38,7 +45,7 @@ Stop checking competitor product pages manually—or building fragile browser sc
 
 ```json
 {
-  "url": "https://allbirds.com/products/mens-tree-runners",
+  "url": "[https://allbirds.com/products/mens-tree-runners](https://allbirds.com/products/mens-tree-runners)",
   "productName": "Men's Tree Runners",
   "brand": "Allbirds",
   "competitorPrice": 98.0,
@@ -61,21 +68,3 @@ Stop checking competitor product pages manually—or building fragile browser sc
   "aiAnalysisMode": "Gemini",
   "checkedAt": "2026-11-16T15:30:00+00:00"
 }
-```
-
----
-
-## Pricing (Pay-Per-Event)
-
-This Actor uses transparent **Pay-Per-Event** monetization:
-- **`product-analyzed`** (`count=1`): Charged once per product URL analyzed and pushed to the dataset.
-
----
-
-## Integration with Slack, n8n, Make, and AI Agents (MCP)
-
-1. **Automated Slack Alerts (n8n / Make)**:
-   - Schedule this Actor daily or hourly via Apify Schedules or n8n's Apify node.
-   - Filter items where `urgencyLevel == "HIGH"` (e.g., `OUT_OF_STOCK` or major price undercut) and forward `slackAlertMessage` straight to a Slack Incoming Webhook.
-2. **AI Agent Integration (Apify MCP)**:
-   - Connect via `https://mcp.apify.com` so your AI merchandising assistant can inspect live competitor prices, stockouts, and shipping offers on demand.
